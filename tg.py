@@ -1,15 +1,8 @@
-import telebot
-from googletrans import Translator
-from langdetect import detect
+# Берем полученное сообщение и переводим его
+  translated_text = translator.translate(message.text, src=src, dest=dest).text
 
-# Создаем переводчик
-translator = Translator()
-bot = telebot.TeleBot('5970069277:AAEGlfiW4MF4F4wJgO8pr1qVx_GZczvpGoA')
-# Определяем функцию для обработки сообщений
-@bot.message_handler(func=lambda m: True)
-def translate_message(message):
-  # Определяем язык исходного текста
-  src = detect(message.text)
+  # Отправляем переведенное сообщение
+  bot.send_message(message.chat.id, translated_text)
 
-  # Задаем целевой язык
-  dest = 'ru'
+# Запускаем бота
+bot.polling(none_stop=True)
